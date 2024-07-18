@@ -1,0 +1,7 @@
+# pip3 install -r requirements.txt
+# sudo yum install -y git python3-pip
+#
+Flask==2.0.1
+PyMySQL==1.0.2
+requests
+urllib3==1.25.11
