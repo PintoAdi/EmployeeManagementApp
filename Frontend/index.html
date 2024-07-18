@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Employee Management</title>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Employee Management</h1>
+
+  <!-- Insert Form -->
+  <h2>Insert New Employee</h2>
+  <form method="POST" action="/insert">
+    <label for="id">ID:</label><br>
+    <input type="number" id="id" name="id" required><br><br>
+
+    <label for="first_name">First Name:</label><br>
+    <input type="text" id="first_name" name="first_name" required><br><br>
+
+    <label for="last_name">Last Name:</label><br>
+    <input type="text" id="last_name" name="last_name" required><br><br>
+
+    <label for="date_joined">Date Joined:</label><br>
+    <input type="date" id="date_joined" name="date_joined" required><br><br>
+
+    <label for="tasks_given">Tasks Given:</label><br>
+    <input type="number" id="tasks_given" name="tasks_given" required><br><br>
+
+    <label for="tasks_completed">Tasks Completed:</label><br>
+    <input type="number" id="tasks_completed" name="tasks_completed" required><br><br>
+
+    <input type="submit" value="Insert">
+  </form>
+
+  <!-- Employee Table -->
+  <h2>Employee Data</h2>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Date Joined</th>
+      <th>Tasks Given</th>
+      <th>Tasks Completed</th>
+      <th>Action</th>
+    </tr>
+    {% for employee in employees %}
+    <tr>
+      <td>{{ employee.id }}</td>
+      <td>{{ employee.first_name }}</td>
+      <td>{{ employee.last_name }}</td>
+      <td>{{ employee.date_joined }}</td>
+      <td>{{ employee.tasks_given }}</td>
+      <td>{{ employee.tasks_completed }}</td>
+      <td><a href="/edit/{{ employee.id }}">Edit</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  {% if mode == 'edit' %}
+  <!-- Edit Form -->
+  <h2>Edit Employee</h2>
+  <form method="POST" action="/edit/{{ employee.id }}">
+    <label for="first_name_edit">First Name:</label><br>
+    <input type="text" id="first_name_edit" name="first_name" value="{{ employee.first_name }}" required><br><br>
+
+    <label for="last_name_edit">Last Name:</label><br>
+    <input type="text" id="last_name_edit" name="last_name" value="{{ employee.last_name }}" required><br><br>
+
+    <label for="date_joined_edit">Date Joined:</label><br>
+    <input type="date" id="date_joined_edit" name="date_joined" value="{{ employee.date_joined }}" required><br><br>
+
+    <label for="tasks_given_edit">Tasks Given:</label><br>
+    <input type="number" id="tasks_given_edit" name="tasks_given" value="{{ employee.tasks_given }}" required><br><br>
+
+    <label for="tasks_completed_edit">Tasks Completed:</label><br>
+    <input type="number" id="tasks_completed_edit" name="tasks_completed" value="{{ employee.tasks_completed }}" required><br><br>
+
+    <input type="submit" value="Update">
+  </form>
+  {% endif %}
+
+</body>
+</html>
